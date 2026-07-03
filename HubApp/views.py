@@ -517,3 +517,12 @@ def cate_all(request, category):
         category__name=category
     ).all()
     return render(request,'category.html', {'products': data})
+
+
+
+
+def cate_all(request, category):
+    data = products.objects.filter(
+        category__name=category
+    ).all()
+    return render(request,'category.html', {'products': data})
