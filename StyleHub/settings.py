@@ -135,5 +135,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+<<<<<<< HEAD
 STRIPE_PUBLIC_KEY = "pk_test_51SynjABy9y0BpDwIyLFoyXCxe2rMEpwwP0rVfoQ2I2E1MjPqz9etxOo2e3gw3SbvGQ42yEbxddaKV0xAK01GrpI800zVKwjhsF"  # pk_test_hZFYGaBpYdraSagjw5X2RpQC in this example
 STRIPE_SECRET_KEY = "sk_test_51SynjABy9y0BpDwIeW3Wk8O9J6s1cxCysaZG3t4u5o57veplGE29tmnRGBp3mcRHGNVk3vRBeIWVf9koorZuRqXK00Cb2zLp8N" 
+=======
+
+STRIPE_PUBLIC_KEY = "pk_test_51SynjABy9y0BpDwIyLFoyXCxe2rMEpwwP0rVfoQ2I2E1MjPqz9etxOo2e3gw3SbvGQ42yEbxddaKV0xAK01GrpI800zVKwjhsF"  # pk_test_hZFYGaBpYdraSagjw5X2RpQC in this example
+STRIPE_SECRET_KEY = "sk_test_51SynjABy9y0BpDwIeW3Wk8O9J6s1cxCysaZG3t4u5o57veplGE29tmnRGBp3mcRHGNVk3vRBeIWVf9koorZuRqXK00Cb2zLp8N" 
+
+>>>>>>> c75696ff37f5cf762cd6e97930211c090146b0d8
