@@ -1,0 +1,275 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Orders</title>
+
+<style>
+
+body{
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin:0;
+    background:#f5f6f8;
+}
+.main-header {
+     margin-bottom: 100px;
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.footer {
+    margin-top: 370px;
+    background: #f9f9f9;
+    text-align: center;
+    padding: 20px 0 10px;
+    border-top: 1px solid #ddd;
+    font-family: 'Poppins', sans-serif;
+}
+/* Header */
+.header{
+    background:#111;
+    color:white;
+    padding:18px;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+}
+
+/* Container */
+.container{
+    width:92%;
+    max-width:1000px;
+    margin:30px auto;
+}
+
+/* Card */
+.order-card{
+    display:flex;
+    gap:20px;
+    background:white;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:18px;
+    border:1px solid #ddd;
+}
+
+/* Image */
+.product-img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+/* Details */
+.details{
+    flex:1;
+}
+
+/* Name */
+.product-name{
+    font-size:18px;
+    font-weight:600;
+    color:#222;
+}
+
+/* Meta */
+.meta{
+    font-size:14px;
+    margin-top:6px;
+    color:#555;
+}
+
+.price{
+    color:#000;
+    font-weight:600;
+}
+
+/* Address */
+.address{
+    font-size:13px;
+    margin-top:6px;
+    color:#666;
+}
+
+/* Right */
+.right{
+    text-align:right;
+}
+
+/* Date */
+.date{
+    font-size:13px;
+    color:#888;
+}
+
+/* Status */
+.status{
+    margin-top:10px;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+/* Status Colors */
+.pending{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.shipped{
+    background:#d1ecf1;
+    color:#0c5460;
+}
+
+.delivered{
+    background:#d4edda;
+    color:#155724;
+}
+
+/* Button */
+.back-btn{
+    display:inline-block;
+    margin-bottom:20px;
+    padding:8px 18px;
+    border:none;
+    border-radius:6px;
+    background:#111;
+    color:#fff;
+    cursor:pointer;
+}
+
+.back-btn:hover{
+    background:#333;
+}
+
+/* Empty */
+.empty{
+    text-align:center;
+    margin-top:50px;
+    font-size:18px;
+    color:#555;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .order-card{
+        flex-direction:column;
+    }
+
+    .right{
+        text-align:left;
+        margin-top:10px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+{% include 'basc.html' %}
+
+
+{% block content %}{% endblock %}
+    
+
+
+
+<div class="container">
+
+
+{% if orders %}
+
+{% for o in orders %}
+
+<div class="order-card">
+
+<img src="{{ o.product.images.url }}" class="product-img">
+
+<div class="details">
+
+<div class="product-name">
+{{ o.product.product_name }}
+</div>
+
+<div class="meta">
+<span class="price">₹{{ o.product.price }}</span> • Quantity: {{ o.quantity }}
+</div>
+
+<div class="address">
+Delivery Address: {{ o.address }}
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="date">
+Ordered on: {{ o.order_date }}
+</div>
+
+<div class="status
+{% if o.status == 'pending' %}pending
+{% elif o.status == 'shipped' %}shipped
+{% else %}delivered
+{% endif %}
+">
+{{ o.status|title }}
+</div>
+
+
+<div class="status
+{% if o.status == 'pending' %}pending
+{% elif o.status == 'shipped' %}shipped
+{% else %}delivered
+{% endif %}
+">
+{{ o.Shipping }}
+</div>
+<div>
+    <form method="POST" action="{% url 'cancel_order' o.id %}">
+    {% csrf_token %}
+
+    {% if o.status != "cancelled" and o.status != "delivered" %}
+        <button style="
+            margin-top:30px;
+            padding:6px 12px;
+            border:none;
+            border-radius:6px;
+            background:#dc3545;
+            color:white;
+            cursor:pointer;
+        ">
+            Cancel Order
+        </button>
+    {% endif %}
+</form>
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p class="empty">No orders found</p>
+
+{% endif %}
+
+
+</div>
+
+{% include 'footer.html' %}
+
+</body>
+</html>

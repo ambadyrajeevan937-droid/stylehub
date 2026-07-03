@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+        }
+
+        .container{
+            width: 90%;
+            margin: auto;
+        }
+
+        .search-box{
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box input{
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-box button{
+            padding: 10px 15px;
+            border: none;
+            background: #ff9900;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .products{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+            gap: 20px;
+        }
+
+        .card{
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card img{
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .price{
+            color: green;
+            font-weight: bold;
+        }
+
+        .btn{
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #2874f0;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .product-section {
+    width: 90%;
+    margin: 30px auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Title */
+.section-header h2 {
+    font-size: 22px;
+    color: #222;
+    position: relative;
+}
+
+/* Underline effect */
+.section-header h2::after {
+    content: "";
+    width: 40px;
+    height: 3px;
+    background: #d4a017; /* gold */
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+}
+
+/* View All */
+.view-all {
+    font-size: 13px;
+    text-decoration: none;
+    color: #d4a017;
+    font-weight: 500;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+
+<body>
+{% include 'basc.html' %}
+
+
+{% block content %}{% endblock %}
+<div class="product-section">
+
+    <div class="section-header">
+        <h2>New Arrivals</h2>
+        <a href="#" class="view-all">View All</a>
+    </div>
+
+</div>
+
+    
+
+<div class="container">
+ 
+    <!-- Search -->
+    <form method="get" class="search-box">
+        <input type="text" name="q" placeholder="Search products..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Products -->
+    <div class="products">
+        {% for p in products %}
+        <div class="card">
+            <img src="{{ p.images.url }}">
+            <h3>{{ p.product_name }}</h3>
+            <p class="price">₹{{ p.price }}</p>
+            <p>{{ p.description|truncatechars:60 }}</p>
+            <a class="btn" href="productbuy/{{p.id}}">BUY</a>
+            <a class="btn" href="addtocart/{{p.id}}">CART</a>
+        </div>
+        {% empty %}
+        <p>No products found</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% include 'footer.html' %}
+
+</body>
+</html>

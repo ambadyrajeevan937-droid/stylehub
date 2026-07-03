@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Product</title>
+
+<style>
+
+body{
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:#f5f6f8;
+    margin:0;
+}
+
+/* Container */
+.container{
+    max-width:1000px;
+    margin:40px auto;
+    background:#fff;
+    border-radius:8px;
+    padding:25px;
+    display:flex;
+    gap:30px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Left Image */
+.left{
+    flex:1;
+}
+
+.product-img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+    border-radius:6px;
+    border:1px solid #ddd;
+}
+
+/* Right Section */
+.right{
+    flex:1.2;
+}
+
+/* Title */
+.product-name{
+    font-size:22px;
+    font-weight:600;
+    color:#222;
+    margin-bottom:10px;
+}
+
+/* Price */
+.price{
+    font-size:24px;
+    color:#b12704;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+/* Description */
+.desc{
+    font-size:15px;
+    color:#333;
+    line-height:1.7;
+    margin-bottom:20px;
+
+    background:#fafafa;
+    padding:15px;
+    border-left:4px solid #ffd814;
+    border-radius:6px;
+
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Form */
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    font-size:14px;
+    font-weight:600;
+    display:block;
+    margin-bottom:5px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:4px;
+    font-size:14px;
+}
+
+/* Button */
+.buy-btn{
+    width:100%;
+    padding:12px;
+    background:#ffd814;
+    border:none;
+    border-radius:6px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.buy-btn:hover{
+    background:#f7ca00;
+}
+
+/* Back */
+  .back{
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #2874f0;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+.back:hover{
+    text-decoration:underline;
+}
+
+/* Mobile */
+@media(max-width:768px){
+    .container{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+    {% include 'basc.html' %}
+
+
+{% block content %}{% endblock %}
+    <a href="javascript:history.back()" class="back">← Back</a>
+
+<div class="container">
+
+    <!-- LEFT -->
+    <div class="left">
+        {% if product.images %}
+            <img src="{{ product.images.url }}" class="product-img">
+        {% else %}
+            <img src="{% static 'no-image.png' %}" class="product-img">
+        {% endif %}
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+        
+
+        <div class="product-name">
+            {{ product.product_name }}
+        </div>
+
+        <div class="price">
+            ₹{{ product.price }}
+        </div>
+
+        <div class="desc">
+            {{ product.description }}
+        </div>
+
+        <form action="../../buyproduct/{{product.id}}" method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" name="quantity" value="1" min="1">
+            </div>
+
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <input type="text" name="address" placeholder="Enter your address" required>
+            </div>
+
+            <button type="submit" class="buy-btn">Buy Now</button>
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body{
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container{
+            background: #ffffff;
+            width: 420px;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        h2{
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label{
+            font-weight: 500;
+            color: #444;
+        }
+
+        input, textarea{
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus{
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102,126,234,0.5);
+        }
+
+        textarea{
+            resize: none;
+            height: 80px;
+        }
+
+        img{
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        button{
+            width: 100%;
+            background: #667eea;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background: #5a67d8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Edit Product</h2>
+
+    <form action="{% url 'editproduct' product.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>Name</label>
+        <input type="text" name="product_name" value="{{ product.product_name }}">
+
+        <label>Price</label>
+        <input type="number" name="price" value="{{ product.price }}">
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" value="{{ product.quantity }}">
+
+        <label>Description</label>
+        <textarea name="description">{{ product.description }}</textarea>
+
+        {% if product.images %}
+            <img src="{{ product.images.url }}" width="150">
+        {% endif %}
+
+        <label>Image</label>
+        <input type="file" name="image">
+
+        <button type="submit">Update Product</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- bar.html -->
+<style>
+    .sidebar {
+        width: 240px;           /* fixed width */
+        min-height: 100vh;      /* full height */
+        background: #111827;
+        color: #fff;
+        padding: 20px;
+        position: fixed;        /* keeps sidebar fixed */
+        left: 0;
+        top: 0;
+    }
+    
+
+    .logo {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        padding: 12px 15px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        transition: 0.3s;
+    }
+
+    .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+    }
+
+    .sidebar ul li:hover,
+    .sidebar ul li.active {
+        background: #2563eb;
+    }
+
+    .logout {
+        background: #dc2626;
+    }
+    .main {
+    margin-left: 240px; /* SAME as sidebar width */
+    padding: 20px;
+}
+
+</style>
+
+
+<body>
+    
+    <aside class="sidebar">
+    <div class="logo">Admin</div>
+    <ul>
+        <li class="active"><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/addp">Add Product</a></li>
+        <li><a href="/viewproductt">View Products</a></li>
+        <li><a href="/orders">Orders</a></li>
+        <li><a href="/customers">Users</a></li>
+        <li class="logout"><a href="/logoutout">Logout</a></li>
+    </ul>
+</aside>
+
+</body>
+</html>
