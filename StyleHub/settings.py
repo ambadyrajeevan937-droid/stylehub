@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-krrpbs_cwu1(!r82(!$7(d1#*t(%ob!tr!gwv&=n2bwm7n0$v+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,3 +128,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+STRIPE_PUBLIC_KEY = "pk_test_51SynjABy9y0BpDwIyLFoyXCxe2rMEpwwP0rVfoQ2I2E1MjPqz9etxOo2e3gw3SbvGQ42yEbxddaKV0xAK01GrpI800zVKwjhsF"  # pk_test_hZFYGaBpYdraSagjw5X2RpQC in this example
+STRIPE_SECRET_KEY = "sk_test_51SynjABy9y0BpDwIeW3Wk8O9J6s1cxCysaZG3t4u5o57veplGE29tmnRGBp3mcRHGNVk3vRBeIWVf9koorZuRqXK00Cb2zLp8N" 
