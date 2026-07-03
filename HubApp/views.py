@@ -520,9 +520,3 @@ def cate_all(request, category):
 
 
 
-
-def cate_all(request, category):
-    data = products.objects.filter(
-        category__name=category
-    ).all()
-    return render(request,'category.html', {'products': data})
